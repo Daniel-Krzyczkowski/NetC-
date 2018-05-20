@@ -30,6 +30,11 @@ namespace TransportAppSimulator
         {
         }
 
+        /// <summary>
+        /// Initialize connection with hub.
+        /// </summary>
+        /// <param name="connectionUrl"></param>
+        /// <returns></returns>
         public async Task Initialize(string connectionUrl)
         {
             _connectionUrl = connectionUrl;
@@ -41,7 +46,10 @@ namespace TransportAppSimulator
             await _hub.StartAsync();
         }
 
-
+        /// <summary>
+        /// Subscribe to receive updates from the hub.
+        /// </summary>
+        /// <param name="methodName"></param>
         public void SubscribeHubMethod(string methodName)
         {
             _hub.On<LocationUpdate>(methodName, (locationUpdate) =>
@@ -50,11 +58,21 @@ namespace TransportAppSimulator
             });
         }
 
+        /// <summary>
+        /// Send new message to hub.
+        /// </summary>
+        /// <param name="methodName"></param>
+        /// <param name="locationUpdate"></param>
+        /// <returns></returns>
         public async Task SendHubMessage(string methodName, LocationUpdate locationUpdate)
         {
             await _hub?.InvokeAsync(methodName, locationUpdate);
         }
 
+        /// <summary>
+        /// Close connection between client and hub.
+        /// </summary>
+        /// <returns></returns>
         public async Task CloseConnection()
         {
             await _hub.DisposeAsync();
