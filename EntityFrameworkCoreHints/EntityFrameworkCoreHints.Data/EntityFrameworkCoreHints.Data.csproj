@@ -10,11 +10,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\EntityFrameworkCoreJumpStartWithExpressions.Common\EntityFrameworkCoreJumpStartWithExpressions.Common.csproj" />
+    <Folder Include="Mappers\" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Mappers\" />
+    <ProjectReference Include="..\EntityFrameworkCoreHints.Common\EntityFrameworkCoreHints.Common.csproj" />
   </ItemGroup>
 
 </Project>

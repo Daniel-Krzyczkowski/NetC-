@@ -17,8 +17,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\EntityFrameworkCoreJumpStartWithExpressions.Common\EntityFrameworkCoreJumpStartWithExpressions.Common.csproj" />
-    <ProjectReference Include="..\EntityFrameworkCoreJumpStartWithExpressions.Data\EntityFrameworkCoreJumpStartWithExpressions.Data.csproj" />
+    <ProjectReference Include="..\EntityFrameworkCoreHints.Common\EntityFrameworkCoreHints.Common.csproj" />
+    <ProjectReference Include="..\EntityFrameworkCoreHints.Data\EntityFrameworkCoreHints.Data.csproj" />
   </ItemGroup>
 
 </Project>

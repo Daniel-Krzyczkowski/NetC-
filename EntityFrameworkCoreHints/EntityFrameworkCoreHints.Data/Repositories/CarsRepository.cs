@@ -1,4 +1,4 @@
-﻿using EntityFrameworkCoreJumpStart.Data.Model;
+﻿using EntityFrameworkCoreHints.Data.Model;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EntityFrameworkCoreJumpStart.Data.Repositories
+namespace EntityFrameworkCoreHints.Data.Repositories
 {
     public class CarsRepository : IGenericRepository<Car>
     {
@@ -21,6 +21,7 @@ namespace EntityFrameworkCoreJumpStart.Data.Repositories
         {
             var cars = await _applicationDbContext.Cars
                .ToListAsync();
+
 
             return cars;
         }

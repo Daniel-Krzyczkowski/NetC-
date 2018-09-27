@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using EntityFrameworkCoreJumpStart.Data;
-using EntityFrameworkCoreJumpStart.Data.Model;
-using EntityFrameworkCoreJumpStart.Data.Repositories;
+using EntityFrameworkCoreHints.Data;
+using EntityFrameworkCoreHints.Data.Model;
+using EntityFrameworkCoreHints.Data.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -13,7 +13,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
-namespace EntityFrameworkCoreJumpStart.WebAPI
+namespace EntityFrameworkCoreHints.WebAPI
 {
     public class Startup
     {
@@ -36,6 +36,11 @@ namespace EntityFrameworkCoreJumpStart.WebAPI
                   Configuration.GetConnectionString("ApplicationDbContext")
               )
             );
+
+            services.BuildServiceProvider()
+                .GetService<ApplicationDbContext>()
+                .Database
+                .Migrate();
 
             services.AddScoped<IGenericRepository<Owner>, OwnersRepository>();
             services.AddScoped<IGenericRepository<Car>, CarsRepository>();

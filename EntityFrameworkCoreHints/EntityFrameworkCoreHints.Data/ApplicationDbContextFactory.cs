@@ -4,9 +4,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Microsoft.Extensions.Configuration;
-using EntityFrameworkCoreJumpStart.Common;
+using EntityFrameworkCoreHints.Common;
 
-namespace EntityFrameworkCoreJumpStart.Data
+namespace EntityFrameworkCoreHints.Data
 {
     public class ApplicationDbContextFactory : IDesignTimeDbContextFactory<ApplicationDbContext>
     {
@@ -15,7 +15,7 @@ namespace EntityFrameworkCoreJumpStart.Data
             var configuration = CoreConfigurationProvider.BuildConfiguration();
 
             var builder = new DbContextOptionsBuilder<ApplicationDbContext>();
-            builder.UseSqlServer(configuration.GetConnectionString("ApplicationDbContext"), b => b.MigrationsAssembly("EntityFrameworkCoreJumpStartWithExpressions.Data"));
+            builder.UseSqlServer(configuration.GetConnectionString("ApplicationDbContext"), b => b.MigrationsAssembly("EntityFrameworkCoreHints.Data"));
             return new ApplicationDbContext(builder.Options);
         }
     }

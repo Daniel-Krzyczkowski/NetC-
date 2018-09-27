@@ -1,12 +1,12 @@
-﻿using EntityFrameworkCoreJumpStart.Data.Model;
-using EntityFrameworkCoreJumpStart.Data.Repositories;
+﻿using EntityFrameworkCoreHints.Data.Model;
+using EntityFrameworkCoreHints.Data.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace EntityFrameworkCoreJumpStart.WebAPI.Controllers
+namespace EntityFrameworkCoreHints.WebAPI.Controllers
 {
     [Route("api/[controller]")]
     public class OwnersController : ControllerBase

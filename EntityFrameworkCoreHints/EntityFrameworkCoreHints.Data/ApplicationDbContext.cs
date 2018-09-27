@@ -1,10 +1,13 @@
-﻿using EntityFrameworkCoreJumpStart.Data.Model;
+﻿using EntityFrameworkCoreHints.Data.Model;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 
-namespace EntityFrameworkCoreJumpStart.Data
+namespace EntityFrameworkCoreHints.Data
 {
     public class ApplicationDbContext : DbContext
     {
@@ -26,6 +29,19 @@ namespace EntityFrameworkCoreJumpStart.Data
             modelBuilder.Entity<Car>()
                 .Property(b => b.RegistrationNumber)
                 .HasMaxLength(7);
+        }
+
+        public override Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            var addedAuditedEntities = ChangeTracker.Entries<IEntity>()
+                .Where(p => p.State == EntityState.Added)
+                .Select(p => p.Entity);
+
+            var modifiedAuditedEntities = ChangeTracker.Entries<IEntity>()
+                .Where(p => p.State == EntityState.Modified)
+                .Select(p => p.Entity);
+
+            return base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);
         }
     }
 }

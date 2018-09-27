@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace EntityFrameworkCoreJumpStart.Data.Model
+namespace EntityFrameworkCoreHints.Data.Model
 {
     public interface IEntity
     {

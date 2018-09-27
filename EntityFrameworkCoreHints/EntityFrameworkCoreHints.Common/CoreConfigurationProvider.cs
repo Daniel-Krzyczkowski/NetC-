@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
-namespace EntityFrameworkCoreJumpStart.Common
+namespace EntityFrameworkCoreHints.Common
 {
     public static class CoreConfigurationProvider
     {

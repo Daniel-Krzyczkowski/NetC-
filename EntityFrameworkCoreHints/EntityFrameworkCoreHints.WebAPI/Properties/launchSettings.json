@@ -16,7 +16,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "EntityFrameworkCoreJumpStart.WebAPI": {
+    "EntityFrameworkCoreHints.WebAPI": {
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "api/",
