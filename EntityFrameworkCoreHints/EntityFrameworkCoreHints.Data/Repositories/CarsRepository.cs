@@ -1,4 +1,6 @@
-﻿using EntityFrameworkCoreHints.Data.Model;
+﻿using EntityFrameworkCoreHints.Data.Mappers;
+using EntityFrameworkCoreHints.Data.Mappers.DTO;
+using EntityFrameworkCoreHints.Data.Model;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -11,10 +13,13 @@ namespace EntityFrameworkCoreHints.Data.Repositories
     public class CarsRepository : IGenericRepository<Car>
     {
         private readonly ApplicationDbContext _applicationDbContext;
+        private readonly ICarsMapper _carsMapper;
 
-        public CarsRepository(ApplicationDbContext applicationDbContext)
+
+        public CarsRepository(ApplicationDbContext applicationDbContext, ICarsMapper carsMapper)
         {
             _applicationDbContext = applicationDbContext;
+            _carsMapper = carsMapper;
         }
 
         public async Task<IEnumerable<Car>> AllAsync()
@@ -43,9 +48,20 @@ namespace EntityFrameworkCoreHints.Data.Repositories
 
         public async Task<Car> GetAsync(Guid id)
         {
-            return await _applicationDbContext.Cars
+            // All cars will be loaded to the memory first and then Where condition will be applied:
+            var enumerableCar = _applicationDbContext.Cars.ToList().Where(x => x.Id == id).SingleOrDefault();
+
+            //Cars table will be filtered on the database side and then specific car record will be returned:
+            var queryableCar = _applicationDbContext.Cars.Where(x => x.Id == id).SingleOrDefault();
+
+            // We can use below code to do filtering on the database side:
+            var car = await _applicationDbContext.Cars
                .Where(x => x.Id == id)
                .SingleOrDefaultAsync();
+
+            // We can also shorten above query and move condition from Where to SingleOrDefault method:
+            return await _applicationDbContext.Cars
+               .SingleOrDefaultAsync(x => x.Id == id);
         }
 
         public async Task<Car> InsertAsync(Car car)
@@ -73,6 +89,16 @@ namespace EntityFrameworkCoreHints.Data.Repositories
             await _applicationDbContext.SaveChangesAsync(true);
 
             return existingCar;
+        }
+
+        public async Task<CarDTO> GetCarDTO(Guid id)
+        {
+            var carDTO = await _applicationDbContext.Cars
+              .Where(x => x.Id == id)
+              .Select(_carsMapper.MapToDTO)
+              .SingleOrDefaultAsync();
+
+            return carDTO;
         }
     }
 }

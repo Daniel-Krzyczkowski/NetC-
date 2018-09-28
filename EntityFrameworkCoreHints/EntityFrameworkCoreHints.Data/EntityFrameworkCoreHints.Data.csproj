@@ -10,10 +10,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Mappers\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\EntityFrameworkCoreHints.Common\EntityFrameworkCoreHints.Common.csproj" />
   </ItemGroup>
 

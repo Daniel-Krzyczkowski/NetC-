@@ -1,4 +1,5 @@
-﻿using EntityFrameworkCoreHints.Data.Model;
+﻿using EntityFrameworkCoreHints.Data.Configuration;
+using EntityFrameworkCoreHints.Data.Model;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -21,14 +22,16 @@ namespace EntityFrameworkCoreHints.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Car>()
-                .HasOne<Owner>()
-                .WithMany()
-                .HasForeignKey(a => a.OwnerId);
+            //modelBuilder.Entity<Car>()
+            //    .HasOne<Owner>()
+            //    .WithMany()
+            //    .HasForeignKey(a => a.OwnerId);
 
-            modelBuilder.Entity<Car>()
-                .Property(b => b.RegistrationNumber)
-                .HasMaxLength(7);
+            //modelBuilder.Entity<Car>()
+            //    .Property(b => b.RegistrationNumber)
+            //    .HasMaxLength(7);
+
+            modelBuilder.ApplyConfiguration(new CarEntityConfiguration());
         }
 
         public override Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess, CancellationToken cancellationToken = default(CancellationToken))

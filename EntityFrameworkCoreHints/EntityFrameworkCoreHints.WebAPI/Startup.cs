@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using EntityFrameworkCoreHints.Data;
+using EntityFrameworkCoreHints.Data.Mappers;
 using EntityFrameworkCoreHints.Data.Model;
 using EntityFrameworkCoreHints.Data.Repositories;
 using Microsoft.AspNetCore.Builder;
@@ -44,6 +45,7 @@ namespace EntityFrameworkCoreHints.WebAPI
 
             services.AddScoped<IGenericRepository<Owner>, OwnersRepository>();
             services.AddScoped<IGenericRepository<Car>, CarsRepository>();
+            services.AddSingleton<ICarsMapper, CarsMapper>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
